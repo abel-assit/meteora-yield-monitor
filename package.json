@@ -1,0 +1,21 @@
+{
+  "name": "meteora-yield-monitor",
+  "version": "1.0.0",
+  "description": "Meteora DLMM pool yield and volume monitoring tool",
+  "main": "monitor_pools.ts",
+  "scripts": {
+    "monitor": "ts-node monitor_pools.ts",
+    "build": "tsc monitor_pools.ts",
+    "start": "node monitor_pools.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": ["meteora", "solana", "defi", "yield", "monitoring"],
+  "license": "MIT"
+}
