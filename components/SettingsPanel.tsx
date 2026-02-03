@@ -1,7 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlertConfig } from '../types';
+
+interface Props {
+  config?: AlertConfig;
+  onConfigChange?: (config: AlertConfig) => void;
+}
 
 const defaultConfig: AlertConfig = {
   minApr: 20,
@@ -12,12 +17,20 @@ const defaultConfig: AlertConfig = {
   enabled: true,
 };
 
-export function SettingsPanel() {
-  const [config, setConfig] = useState<AlertConfig>(defaultConfig);
+export function SettingsPanel({ config: externalConfig, onConfigChange }: Props) {
+  const [config, setConfig] = useState<AlertConfig>(externalConfig || defaultConfig);
   const [saved, setSaved] = useState(false);
 
+  useEffect(() => {
+    if (externalConfig) {
+      setConfig(externalConfig);
+    }
+  }, [externalConfig]);
+
   const updateConfig = (updates: Partial<AlertConfig>) => {
-    setConfig({ ...config, ...updates });
+    const newConfig = { ...config, ...updates };
+    setConfig(newConfig);
+    onConfigChange?.(newConfig);
     setSaved(false);
   };
 
